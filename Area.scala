@@ -35,7 +35,7 @@ class Area(var name: String, var description: String):
   def contains(itemName: String): Boolean = items.contains(itemName)
 
 
-  def removeItem(itemName: String): Option[Item] = items.remove(itemName)
+  def removeItems(itemName: String): Option[Item] = items.remove(itemName)
 
 
 end Area
