@@ -9,7 +9,7 @@ class Area(var name: String, var description: String):
 
   private var items = Map[String, Item]()
 
-
+  
   def neighbor(direction: String) = this.neighbors.get(direction)
 
 
@@ -29,13 +29,13 @@ class Area(var name: String, var description: String):
     else this.description + exitList
 
 
-  def addItems(item: Item): Unit = items += item.name -> item
+  def addItem(item: Item): Unit = items += item.name -> item
 
 
   def contains(itemName: String): Boolean = items.contains(itemName)
 
 
-  def removeItems(itemName: String): Option[Item] = items.remove(itemName)
+  def removeItem(itemName: String): Option[Item] = items.remove(itemName)
 
 
 end Area
