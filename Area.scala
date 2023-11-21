@@ -29,7 +29,7 @@ class Area(var name: String, var description: String):
     else this.description + exitList
 
 
-  def addItem(item: Item): Unit = items += item.name -> item
+  def addItems(item: Item): Unit = items += item.name -> item
 
 
   def contains(itemName: String): Boolean = items.contains(itemName)
