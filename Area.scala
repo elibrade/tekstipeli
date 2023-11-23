@@ -6,7 +6,7 @@ import scala.collection.mutable.Map
 class Area(var name: String, var description: String):
 
   private val neighbors = Map[String, Area]()
-
+  private var entities = Map[String, Entity]()
   private var items = Map[String, Item]()
 
   
@@ -20,6 +20,8 @@ class Area(var name: String, var description: String):
   def setNeighbors(exits: Vector[(String, Area)]) =
     this.neighbors ++= exits
 
+  def addEntity(name: String, entity: Entity) =
+    this.entities += name -> entity
 
   def fullDescription =
     val exitList = "\n\nExits available: " + this.neighbors.keys.mkString(" ")

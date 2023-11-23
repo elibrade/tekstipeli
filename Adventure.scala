@@ -8,17 +8,20 @@ class Adventure:
   private val outside     = Area("Outside of the dungeon", "It's raining")
   private val middle      = Area("Middle", "Middle of the Dungeon")
   private val south       = Area("South", "Southern Dungeon")
-  private val ghost       = Entity("BOOOOOO!", "a melancholic ghost monster appears")
+  private val hallway     = Area("Hallway", "Water is dripping from the mossy ceiling.")
   private val home        = Area("Home", "You've arrived home")
   private val destination = home
 
-  middle      .setNeighbors(Vector("south" -> south, "east" -> ghost, "west" -> outside))
+  middle      .setNeighbors(Vector("south" -> south, "east" -> hallway, "west" -> outside))
   outside     .setNeighbors(Vector("east" -> middle))
-  ghost       .setNeighbors(Vector("west" -> middle, "east" -> destination))
+  hallway     .setNeighbors(Vector("west" -> middle, "east" -> destination))
   south       .setNeighbors(Vector("north" -> middle))
   destination .setNeighbors(Vector("west" -> middle))
 
-  
+  hallway     .addEntity("kloopstanaab", new Entity("kloopstanaab", "a melancholic ghost", 100))
+
+ //  ("BOOOOOO!", "a melancholic ghost monster appears")
+
   val player = Player(outside) // aloitussijainti
 
   var turnCount = 0 // kuinka monta vuoroa kulunut
