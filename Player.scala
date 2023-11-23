@@ -14,6 +14,7 @@ class Player(startingArea: Area):
   private var currentLocation = startingArea        // gatherer: changes in relation to the previous location
   private var quitCommandGiven = false              // one-way flag
   private var currentInventory = Map[String, Item]()
+  private var isFighting = false                    // true if currently fighting an Entity
 
   /** Determines if the player has indicated a desire to quit the game. */
   def hasQuit = this.quitCommandGiven
@@ -21,6 +22,9 @@ class Player(startingArea: Area):
   /** Returns the player’s current location. */
   def location = this.currentLocation
 
+  def toggleFighting(): Unit = isFighting = !isFighting
+  // onko taistelussa?
+  //  lukitaanko sijainti ja tarjotaan fight/chat/use item -komentoja
 
   /** Attempts to move the player in the given direction. This is successful if there
     * is an exit from the player’s current location towards the direction name. Returns
