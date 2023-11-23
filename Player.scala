@@ -77,9 +77,9 @@ class Player(startingArea: Area):
     else itemDropped = "You don't have that!"
     itemDropped
 
-  def fight(): String = ???
+  def fight(): String = ??? //TODO
 
-  def chat(): String = ???
+  def chat(): String = ??? //TODO
 
     /** Returns a brief description of the player’s state, for debugging purposes. */
   override def toString = "Now at: " + this.location.name
