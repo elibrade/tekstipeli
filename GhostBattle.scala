@@ -21,6 +21,18 @@ class GhostBattle(actor: Player, ghost: Entity) extends Battle:
       else s"Your attack deals ${damageInflicted} damage"
     else "You can't expect to beat me without a weapon."
 
+  def giveTreat(): String =
+    if actor.has(treat) then
+      "MMMM! This shit is tasty asf! Where did you find this?"
+    else "zzzzzz... (the ghost is pretending to sleep)"
+
+  def tellWhere(): String =
+    this.ghost.pacify()
+    this.actor.endBattle()
+    "I must go find some more!"
+
+
+
   def chat: String =
     if math.random < 0.25 then
       this.ghost.pacify()

@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8fe0afa3-d5da-4362-93f8-fe3c738f87ae" name="Changes" comment="moi">
+    <list default="true" id="8fe0afa3-d5da-4362-93f8-fe3c738f87ae" name="Changes" comment="item sword">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_11_2023,_21_05_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_11_2023,_21_05_[Changes]1/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_11_2023__21_05__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Action.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Action.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Adventure.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Adventure.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GhostBattle.scala" beforeDir="false" afterPath="$PROJECT_DIR$/GhostBattle.scala" afterDir="false" />
     </list>
@@ -109,11 +117,28 @@
       <option name="project" value="LOCAL" />
       <updated>1700576373446</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="item sword">
+      <option name="closed" value="true" />
+      <created>1700768742301</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1700768742301</updated>
+    </task>
+    <task id="LOCAL-00003" summary="item sword">
+      <option name="closed" value="true" />
+      <created>1700768784426</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1700768784426</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="moi" />
-    <option name="LAST_COMMIT_MESSAGE" value="moi" />
+    <MESSAGE value="item sword" />
+    <option name="LAST_COMMIT_MESSAGE" value="item sword" />
   </component>
 </project>

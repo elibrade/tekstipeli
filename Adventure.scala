@@ -21,6 +21,7 @@ class Adventure:
   hallway     .addEntity(new Entity("kloopstanaab", "a melancholic ghost", 100))
 
   south       .addItem("sword", new Item("sword", "something every self-respecting adventurer should have")
+  outside     .addItem("treat", new Item("treat", "mmmm..., this looks tasty")
 
  //  ("BOOOOOO!", "a melancholic ghost monster appears")
 
