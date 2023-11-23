@@ -1,6 +1,5 @@
 package tekstipeli
 
-import scala.util.Random
 import scala.collection.mutable.Map
 
 /** A `Player` object represents a player character controlled by the real-life user
@@ -15,13 +14,13 @@ class Player(startingArea: Area):
   private var currentLocation = startingArea        // gatherer: changes in relation to the previous location
   private var quitCommandGiven = false              // one-way flag
   private var currentInventory = Map[String, Item]()
+ // private var currentBattle = Option[Battle]
 
   /** Determines if the player has indicated a desire to quit the game. */
   def hasQuit = this.quitCommandGiven
 
   /** Returns the player’s current location. */
   def location = this.currentLocation
-
 
   /** Attempts to move the player in the given direction. This is successful if there
     * is an exit from the player’s current location towards the direction name. Returns
@@ -79,7 +78,7 @@ class Player(startingArea: Area):
     itemDropped
 
 
-  def fight(): String = ??? //TODO
+  def attack(): String = ??? //TODO
 
   def chat(): String = ??? //TODO
 
