@@ -20,6 +20,8 @@ class Adventure:
 
   hallway     .addEntity(new Entity("kloopstanaab", "a melancholic ghost", 100))
 
+  south       .addItem("sword", new Item("sword", "something every self-respecting adventurer should have")
+
  //  ("BOOOOOO!", "a melancholic ghost monster appears")
 
   val player = Player(outside) // aloitussijainti
