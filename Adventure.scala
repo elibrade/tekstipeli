@@ -2,7 +2,7 @@ package tekstipeli
 
 class Adventure:
 
-  val title = "Teemu teekkari vs. kelju kylteri"
+  val title = "T-talo dungeon crawl"
 
   // kartan määrittely:
   private val outside     = Area("Outside of the dungeon", "It's raining")
@@ -18,10 +18,10 @@ class Adventure:
   south       .setNeighbors(Vector("north" -> middle))
   destination .setNeighbors(Vector("west" -> middle))
 
-  hallway     .addEntity(new Entity("kloopstanaab", "a melancholic ghost", 100))
+  hallway     .addEntity(new Entity("Kloopstanaab", "the melancholic ghost", 100))
 
-  south       .addItem("sword", new Item("sword", "something every self-respecting adventurer should have")
-  outside     .addItem("treat", new Item("treat", "mmmm..., this looks tasty")
+  south       .addItem(new Item("sword", "something every self-respecting adventurer should have"))
+  outside     .addItem(new Item("treat", "mmmm..., this looks tasty"))
 
  //  ("BOOOOOO!", "a melancholic ghost monster appears")
 
@@ -32,11 +32,11 @@ class Adventure:
   val timeLimit = 40  // vuorojen max. ennen autom. häviötä
 
 
-  def isComplete = this.player.location == this.destination // && player.inventory.contains("remote") && player.inventory.contains("battery")
+  def isComplete = this.player.location == this.destination
 
   def isOver = this.isComplete  || this.player.hasQuit || this.turnCount == this.timeLimit
   
-  def welcomeMessage = "welcome to overtale"
+  def welcomeMessage = "Welcome to the Dungeons beneath T-talo!"
 
   def goodbyeMessage =
     if this.isComplete then
@@ -49,9 +49,9 @@ class Adventure:
   def playTurn(command: String) =
     val action = Action(command)
     val outcomeReport =
-    if this.player.isInBattle then
-      action.fight(this.player)
-    else action.execute(this.player)
+      if this.player.isInBattle then
+        action.fight(this.player)
+      else action.execute(this.player)
     if outcomeReport.isDefined then
       this.turnCount += 1
     outcomeReport.getOrElse(s"""Unknown command: "$command".""")

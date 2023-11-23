@@ -23,12 +23,12 @@ object TextUI extends App:
 
 
   /** Prints out a description of the player character’s current location, as seen by the character. */
-  private def printAreaInfo() =
-    val area = this.player.location
-    println("\n\n" + area.name)
-    println("-" * area.name.length)
-    println(area.fullDescription + "\n")
-
+  private def printAreaInfo()=
+    if !this.player.isInBattle then
+      val area = this.player.location
+      println("\n\n" + area.name)
+      println("-" * area.name.length)
+      println(area.fullDescription + "\n")
 
   /** Requests a command from the player, plays a game turn accordingly, and prints out a
     * report of what happened.  */

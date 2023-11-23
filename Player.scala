@@ -31,7 +31,7 @@ class Player(startingArea: Area):
   /** Attempts to move the player in the given direction. This is successful if there
     * is an exit from the player’s current location towards the direction name. Returns
     * a description of the result: "You go DIRECTION." or "You can't go DIRECTION." */
-  def go(direction: String) =
+  def go(direction: String): String =
     val destination = this.location.neighbor(direction)
     if destination.isEmpty then
       "You can't go " + direction + "."
@@ -39,15 +39,16 @@ class Player(startingArea: Area):
       this.currentLocation = destination.getOrElse(this.currentLocation)
       if this.currentLocation.containsEntity then
         val entity: Entity = currentLocation.getEntity
-        this.startGhostBattle(entity)
-        s"a ${entity.fullDescription} appears!"
-      else
-        "You go " + direction + "."
+        if !entity.isPacified then
+          this.startGhostBattle(entity)
+          s"\n${entity.fullDescription} appears!"
+        else "You go " + direction + "."
+      else "You go " + direction + "."
+
 
   /** Causes the player to rest for a short while (this has no substantial effect in game terms).
     * Returns a description of what happened. */
-  def rest(): String =
-    "You rest for a while. Better get a move on, though."
+  def rest(): String = "You rest for a while. Better get a move on, though."
 
 
   /** Signals that the player wants to quit the game. Returns a description of what happened within
@@ -93,10 +94,17 @@ class Player(startingArea: Area):
     else itemDropped = "You don't have that!"
     itemDropped
 
+  def discard(item: String): Unit = this.currentInventory.remove(item)
 
-  def attack(): String = ??? //TODO
+  /** BATTLE SPECIFIC ACTIONS BELOW */
 
-  def chat(): String = ??? //TODO
+  def attack(): String = this.currentBattle.get.attack
+
+  def chat(): String = this.currentBattle.get.chat
+
+  def giveTreat(treat: String): String = this.currentBattle.get.giveTreat(treat)
+
+  def cantGo: String = s"\n${this.currentBattle.get.ghost.name} is blocking the way!"
 
     /** Returns a brief description of the player’s state, for debugging purposes. */
   override def toString = "Now at: " + this.location.name

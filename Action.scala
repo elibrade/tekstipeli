@@ -6,20 +6,20 @@ class Action(input: String):
   private val verb        = commandText.takeWhile( _ != ' ' )
   private val modifiers   = commandText.drop(verb.length).trim
 
-  def fight(actor: Player) =
-    // val battle = actor.currentBattle.get
-    this.verb match    // Actions available within a fight
-    case "fight"         => Some(actor.attack())
+  // Kaikki fightin ja executen metodit palauttaa Stringin, muuten TextUI.playTurn.turnReport vittuilee!!!
+
+  def fight(actor: Player): Option[String] = this.verb match  // Actions available within a fight
+    case "attack"        => Some(actor.attack())
     case "chat"          => Some(actor.chat())
-    case "give a treat"  => Some(actor.giveTreat())
-    case "outside"       => Some(actor.tellWhere())
-    case "go"            => Some("The ghost monster is blocking the way")
+    case "give"          => Some(actor.giveTreat(this.modifiers))
+    // case "outside"    => Some(actor.tellWhere())
+    case "go"            => Some(actor.cantGo)
     case "quit"          => Some(actor.quit())
     case "inventory"     => Some(actor.inventory)
     case other           => None
 
 
-  def execute(actor: Player) = this.verb match    // Actions available when not fighting an Entity
+  def execute(actor: Player): Option[String] = this.verb match    // Actions available when not fighting an Entity
     case "go"            => Some(actor.go(this.modifiers))
     case "rest"          => Some(actor.rest())
     case "xyzzy"         => Some("The grue tastes yummy.")
