@@ -18,7 +18,7 @@ class Adventure:
   south       .setNeighbors(Vector("north" -> middle))
   destination .setNeighbors(Vector("west" -> middle))
 
-  hallway     .addEntity("kloopstanaab", new Entity("kloopstanaab", "a melancholic ghost", 100))
+  hallway     .addEntity(new Entity("kloopstanaab", "a melancholic ghost", 100))
 
  //  ("BOOOOOO!", "a melancholic ghost monster appears")
 

@@ -14,7 +14,7 @@ class Player(startingArea: Area):
   private var currentLocation = startingArea        // gatherer: changes in relation to the previous location
   private var quitCommandGiven = false              // one-way flag
   private var currentInventory = Map[String, Item]()
-  private var currentBattle: Option[Battle] = None
+  private var currentBattle: Option[GhostBattle] = None
 
   def isInBattle: Boolean = currentBattle.nonEmpty
 
@@ -37,9 +37,12 @@ class Player(startingArea: Area):
       "You can't go " + direction + "."
     else
       this.currentLocation = destination.getOrElse(this.currentLocation)
-      "You go " + direction + "."
-//    else if destination.get.isInstanceOf[Entity] then yada-yada-yada
-// TODO:   siirtyminen Battle-tilaan jos alueella on Entity
+      if this.currentLocation.containsEntity then
+        val entity: Entity = currentLocation.getEntity
+        this.startGhostBattle(entity)
+        s"a ${entity.fullDescription} appears!"
+      else
+        "You go " + direction + "."
 
   /** Causes the player to rest for a short while (this has no substantial effect in game terms).
     * Returns a description of what happened. */

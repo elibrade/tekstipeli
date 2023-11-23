@@ -5,11 +5,10 @@ import scala.util.Random
 
 class GhostBattle(actor: Player, ghost: Entity) extends Battle:
 
-  this.actor.startGhostBattle(this.ghost) // 
 
-  def escape: String = ???
-
-  def help: String = ???
+  def escape: String = ""
+  
+  def help: String = ""
 
   def attack: String =
     val damageInflicted = Random.nextInt(34)
@@ -27,8 +26,9 @@ class GhostBattle(actor: Player, ghost: Entity) extends Battle:
       "oh, i'm rambling again\ni'll get out of your way"
     else "zzzzzz... (the ghost is pretending to sleep)"
 
-  def statusCheck: String = ???
+  def statusCheck: String = ""
 
-  def quit: String = ???
+  def quit: String = ""
 
+  
 end GhostBattle
