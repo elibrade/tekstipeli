@@ -14,7 +14,13 @@ class Player(startingArea: Area):
   private var currentLocation = startingArea        // gatherer: changes in relation to the previous location
   private var quitCommandGiven = false              // one-way flag
   private var currentInventory = Map[String, Item]()
- // private var currentBattle = Option[Battle]
+  private var currentBattle: Option[Battle] = None
+
+  def isInBattle: Boolean = currentBattle.nonEmpty
+
+  def startGhostBattle(enemy: Entity): Unit = this.currentBattle = Some(new GhostBattle(this, enemy))
+
+  def endBattle(): Unit = this.currentBattle = None
 
   /** Determines if the player has indicated a desire to quit the game. */
   def hasQuit = this.quitCommandGiven
@@ -27,19 +33,23 @@ class Player(startingArea: Area):
     * a description of the result: "You go DIRECTION." or "You can't go DIRECTION." */
   def go(direction: String) =
     val destination = this.location.neighbor(direction)
-    this.currentLocation = destination.getOrElse(this.currentLocation)
-    if destination.isDefined then "You go " + direction + "." else "You can't go " + direction + "."
-
+    if destination.isEmpty then
+      "You can't go " + direction + "."
+    else
+      this.currentLocation = destination.getOrElse(this.currentLocation)
+      "You go " + direction + "."
+//    else if destination.get.isInstanceOf[Entity] then yada-yada-yada
+// TODO:   siirtyminen Battle-tilaan jos alueella on Entity
 
   /** Causes the player to rest for a short while (this has no substantial effect in game terms).
     * Returns a description of what happened. */
-  def rest() =
+  def rest(): String =
     "You rest for a while. Better get a move on, though."
 
 
   /** Signals that the player wants to quit the game. Returns a description of what happened within
     * the game as a result (which is the empty string, in this case). */
-  def quit() =
+  def quit(): String =
     this.quitCommandGiven = true
     ""
 
@@ -51,7 +61,9 @@ class Player(startingArea: Area):
     else itemPick = s"There is no $itemName here to pick up."
     itemPick
 
+
   def has(itemName: String): Boolean = this.currentInventory.contains(itemName)
+
 
   def inventory: String =
     var itemList: String = ""
@@ -67,6 +79,7 @@ class Player(startingArea: Area):
       itemDesc = s"You look closely at the $itemName.\n${currentInventory(itemName).description}"
     else itemDesc = "If you want to examine something, you need to pick it up first."
     itemDesc
+
 
   def drop(itemName: String): String =
     var itemDropped: String = ""

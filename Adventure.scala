@@ -18,7 +18,7 @@ class Adventure:
   south       .setNeighbors(Vector("north" -> middle))
   destination .setNeighbors(Vector("west" -> middle))
 
-
+  
   val player = Player(outside) // aloitussijainti
 
   var turnCount = 0 // kuinka monta vuoroa kulunut
@@ -29,9 +29,8 @@ class Adventure:
   def isComplete = this.player.location == this.destination // && player.inventory.contains("remote") && player.inventory.contains("battery")
 
   def isOver = this.isComplete  || this.player.hasQuit || this.turnCount == this.timeLimit
-
   
-  def welcomeMessage = "welcome to odens game"
+  def welcomeMessage = "welcome to overtale"
 
   def goodbyeMessage =
     if this.isComplete then
@@ -44,7 +43,7 @@ class Adventure:
   def playTurn(command: String) =
     val action = Action(command)
     val outcomeReport =
-    if this.player.location == ghost then
+    if this.player.isInBattle then
       action.fight(this.player)
     else action.execute(this.player)
     if outcomeReport.isDefined then
