@@ -8,7 +8,7 @@ class Adventure:
   private val outside     = Area("Outside of the dungeon", "It's raining")
   private val middle      = Area("Middle", "Middle of the Dungeon")
   private val south       = Area("South", "Southern Dungeon")
-  private val ghost       = Entity("BOOOOOO!", "... a melancholic ghost monster appears")
+  private val ghost       = Entity("BOOOOOO!", "a melancholic ghost monster appears")
   private val home        = Area("Home", "You've arrived home")
   private val destination = home
 
@@ -43,7 +43,10 @@ class Adventure:
 
   def playTurn(command: String) =
     val action = Action(command)
-    val outcomeReport = action.execute(this.player)
+    val outcomeReport =
+    if this.player.location == ghost then
+      action.fight(this.player)
+    else action.execute(this.player)
     if outcomeReport.isDefined then
       this.turnCount += 1
     outcomeReport.getOrElse(s"""Unknown command: "$command".""")
