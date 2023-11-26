@@ -6,5 +6,4 @@ trait Battle:
   def chat: String
   def help: String
   def statusCheck: String
-  def quit: String
 end Battle

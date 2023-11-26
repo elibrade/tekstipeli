@@ -13,9 +13,11 @@ class Action(input: String):
     case "chat"          => Some(actor.chat())
     case "give"          => Some(actor.giveTreat(this.modifiers))
     // case "outside"    => Some(actor.tellWhere())
-    case "go"            => Some(actor.cantGo)
+    case "go"            => Some(actor.battleGo)
     case "quit"          => Some(actor.quit())
     case "inventory"     => Some(actor.inventory)
+    case "help"          => Some(actor.battleHelp)
+    case "escape"        => Some(actor.escape())
     case other           => None
 
 

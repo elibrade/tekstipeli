@@ -98,13 +98,19 @@ class Player(startingArea: Area):
 
   /** BATTLE SPECIFIC ACTIONS BELOW */
 
-  def attack(): String = this.currentBattle.get.attack
+  def battle: GhostBattle = this.currentBattle.get
 
-  def chat(): String = this.currentBattle.get.chat
+  def attack(): String = this.battle.attack
 
-  def giveTreat(treat: String): String = this.currentBattle.get.giveTreat(treat)
+  def chat(): String = this.battle.chat
 
-  def cantGo: String = s"\n${this.currentBattle.get.ghost.name} is blocking the way!"
+  def giveTreat(treat: String): String = this.battle.giveTreat(treat)
+
+  def battleGo: String = s"\n${this.battle.ghost.name} is blocking the way!"
+
+  def escape(): String = this.battle.escape
+
+  def battleHelp: String = this.battle.help
 
     /** Returns a brief description of the player’s state, for debugging purposes. */
   override def toString = "Now at: " + this.location.name

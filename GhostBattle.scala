@@ -5,9 +5,12 @@ import scala.util.Random
 
 class GhostBattle(val actor: Player, val ghost: Entity) extends Battle:
 
-  def escape: String = ""
+  def escape: String =
+    actor.endBattle()
+    actor.go("west")
+    "You evaded the monster."
   
-  def help: String = ""
+  def help: String = s"Commands available within a battle:\nattack\ngive\nchat\nquit\nescape"
 
   def attack: String =
     if actor.has("sword") then
@@ -42,7 +45,4 @@ class GhostBattle(val actor: Player, val ghost: Entity) extends Battle:
 
   def statusCheck: String = ""
 
-  def quit: String = ""
-
-  
 end GhostBattle
