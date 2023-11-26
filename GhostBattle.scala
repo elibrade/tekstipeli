@@ -10,7 +10,7 @@ class GhostBattle(val actor: Player, val ghost: Entity) extends Battle:
     actor.go("west")
     "You evaded the monster."
   
-  def help: String = s"Commands available within a battle:\nattack\ngive\nchat\nquit\nescape"
+  def help: String = s"Commands available within a battle:\nattack\ngive\ninventory\nchat\nquit\nescape"
 
   def attack: String =
     if actor.has("sword") then
@@ -20,16 +20,22 @@ class GhostBattle(val actor: Player, val ghost: Entity) extends Battle:
         this.ghost.pacify()
         this.actor.endBattle()
         s"\nYour attack deals ${damageInflicted} damage.\numm... you do know you cant kill ghosts, right?"
-      else s"\nYour attack deals ${damageInflicted} damage.\n${this.ghost.name} has ${this.ghost.health} HP left."
-    else "\nzzzzzzz... (you can't expect to beat me without a weapon) zzzzzzzzzzz..."
+      else
+        s"\nYour attack deals ${damageInflicted} damage.\n${this.ghost.name} has ${this.ghost.health} HP left."
+    else
+      "\nzzzzzzz... (you can't expect to beat me without a weapon) zzzzzzzzzzz..."
 
   def giveTreat(treat: String): String =
     if actor.has(treat) then
-      this.actor.discard(treat)
-      this.ghost.pacify()
-      this.actor.endBattle()
-      "\nMMMM! this shit is tasty asf! where did you find this?"
-    else "\nzzzzzzzzzz... (are they gone yet?) zzzzzzzzzzzzzzz...\n (You don't have that item.)"
+      if treat == "treat" then
+        this.actor.discard(treat)
+        this.ghost.pacify()
+        this.actor.endBattle()
+        "\nMMMM! this shit is tasty asf! where did you find this?"
+      else
+        "\nzzzzzzzz... (that doesn't look appetizing) zzzzzzzz...\n (Kloopstanaab has a sweet tooth)"
+    else
+      "\nzzzzzzzzzz... (are they gone yet?) zzzzzzzzzzzzzzz...\n (You don't have that item.)"
 
 /*  def tellWhere(): String = // TODO: Mitä tää tekee?
     this.ghost.pacify()
@@ -41,7 +47,8 @@ class GhostBattle(val actor: Player, val ghost: Entity) extends Battle:
       this.ghost.pacify()
       this.actor.endBattle()
       "\noh, i'm rambling again\ni'll get out of your way"
-    else "\nzzzzzz... (the ghost is pretending to sleep)"
+    else
+      "\nzzzzzz... (the ghost is pretending to sleep)"
 
   def statusCheck: String = ""
 

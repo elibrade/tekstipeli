@@ -30,6 +30,7 @@ class Action(input: String):
     case "examine"       => Some(actor.examine(this.modifiers))
     case "drop"          => Some(actor.drop(this.modifiers))
     case "inventory"     => Some(actor.inventory)
+    case "help"          => Some(actor.help)
     case other           => None
 
   override def toString = s"$verb (modifiers: $modifiers)"
