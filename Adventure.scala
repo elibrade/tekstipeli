@@ -5,16 +5,20 @@ class Adventure:
   val title = "T-talo dungeon crawl"
 
   // kartan määrittely:
-  private val outside     = Area("Outside of the dungeon", "It's raining")
-  private val middle      = Area("Middle", "Middle of the Dungeon")
-  private val south       = Area("South", "Southern Dungeon")
+  private val outside     = Area("Outside of the RUINS", "It's raining")
+  private val entrance    = Area("Entrance Hall", "First room of the RUINS")
+  private val middle      = Area("Main Hall", "The shadow of the ruins looms above, filling you with DETERMINATION.")
+  private val north       = Area("Northern Hall", "The walls are filled runes of with long-forgotten tales.")
+  private val south       = Area("Southern Hall", "The hall is partly collapsed.")
   private val hallway     = Area("Hallway", "Water is dripping from the mossy ceiling.")
   private val home        = Area("Home", "You've arrived home")
   private val destination = home
 
-  middle      .setNeighbors(Vector("south" -> south, "east" -> hallway, "west" -> outside))
-  outside     .setNeighbors(Vector("east" -> middle))
+  outside     .setNeighbors(Vector("east" -> entrance))
+  entrance    .setNeighbors(Vector("west" -> outside, "east" -> middle))
+  middle      .setNeighbors(Vector("north" -> north, "south" -> south, "east" -> hallway, "west" -> entrance))
   hallway     .setNeighbors(Vector("west" -> middle, "east" -> destination))
+  north       .setNeighbors(Vector("south" -> middle))
   south       .setNeighbors(Vector("north" -> middle))
   destination .setNeighbors(Vector("west" -> middle))
 
