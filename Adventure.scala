@@ -2,7 +2,7 @@ package tekstipeli
 
 class Adventure:
 
-  val title = "T-talo dungeon crawl"
+  val title = "RUINS"
 
   // kartan määrittely:
   private val outside     = Area("Outside of the RUINS", "It's raining")
