@@ -8,7 +8,8 @@ class Adventure:
   private val outside     = Area("Outside of the RUINS", "It's raining")
   private val entrance    = Area("Entrance Hall", "First room of the RUINS")
   private val middle      = Area("Main Hall", "The shadow of the ruins looms above, filling you with DETERMINATION.")
-  private val north       = Area("Northern Hall", "The walls are filled runes of with long-forgotten tales.")
+  private val north       = Area("Northern Hall", "The walls are filled with runes of long-forgotten tales.")
+  private val corridor    = Area("Corridor", "The wooden door at the end is too heavy to move.")
   private val south       = Area("Southern Hall", "The hall is partly collapsed.")
   private val hallway     = Area("Hallway", "Water is dripping from the mossy ceiling.")
   private val home        = Area("Home", "You've arrived home")
@@ -18,14 +19,16 @@ class Adventure:
   entrance    .setNeighbors(Vector("west" -> outside, "east" -> middle))
   middle      .setNeighbors(Vector("north" -> north, "south" -> south, "east" -> hallway, "west" -> entrance))
   hallway     .setNeighbors(Vector("west" -> middle, "east" -> destination))
-  north       .setNeighbors(Vector("south" -> middle))
+  north       .setNeighbors(Vector("south" -> middle, "east" -> corridor))
+  corridor    .setNeighbors(Vector("west" -> north))
   south       .setNeighbors(Vector("north" -> middle))
   destination .setNeighbors(Vector("west" -> middle))
 
   hallway     .addEntity(new Entity("Kloopstanaab", "the melancholic ghost", 100))
+  corridor    .addEntity(new Entity("Lesser Wolf", "the junior guard",10))
 
-  south       .addItem(new Item("sword", "something every self-respecting adventurer should have"))
-  outside     .addItem(new Item("treat", "mmmm..., this looks tasty"))
+  south       .addItem(new Item("sword", "It's something every self-respecting adventurer should have."))
+  corridor    .addItem(new Item("treat", "mmmm... this looks tasty"))
 
  //  ("BOOOOOO!", "a melancholic ghost monster appears")
 
@@ -40,7 +43,7 @@ class Adventure:
 
   def isOver = this.isComplete  || this.player.hasQuit || this.turnCount == this.timeLimit
   
-  def welcomeMessage = "Welcome to the Dungeons beneath T-talo!"
+  def welcomeMessage = "Welcome to the RUINS"
 
   def goodbyeMessage =
     if this.isComplete then
@@ -48,7 +51,7 @@ class Adventure:
     else if this.turnCount == this.timeLimit then // game over due to time limit
       "prrrr, time is out"
     else  // game over due to player quitting
-      "hahaa loser"
+      "byee (wags tail)"
 
   def playTurn(command: String) =
     val action = Action(command)
@@ -58,6 +61,6 @@ class Adventure:
       else action.execute(this.player)
     if outcomeReport.isDefined then
       this.turnCount += 1
-    outcomeReport.getOrElse(s"""Unknown command: "$command".""")
+    outcomeReport.getOrElse(s"""Unknown command: "$command"""")
 
 end Adventure

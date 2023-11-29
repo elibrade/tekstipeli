@@ -14,11 +14,15 @@ class Player(startingArea: Area):
   private var currentLocation = startingArea        // gatherer: changes in relation to the previous location
   private var quitCommandGiven = false              // one-way flag
   private var currentInventory = Map[String, Item]()
-  private var currentBattle: Option[GhostBattle] = None
+  private var currentBattle: Option[Battle] = None
+
+  def battle: Battle = this.currentBattle.get
 
   def isInBattle: Boolean = currentBattle.nonEmpty
 
   def startGhostBattle(enemy: Entity): Unit = this.currentBattle = Some(new GhostBattle(this, enemy))
+
+  def startWolfBattle(enemy: Entity): Unit = this.currentBattle = Some(new WolfBattle(this, enemy))
 
   def endBattle(): Unit = this.currentBattle = None
 
@@ -42,7 +46,9 @@ class Player(startingArea: Area):
       if this.currentLocation.containsEntity then
         val entity: Entity = currentLocation.getEntity
         if !entity.isPacified then
-          this.startGhostBattle(entity)
+          entity.name match
+            case "Kloopstanaab" => this.startGhostBattle(entity)
+            case "Lesser Wolf"  => this.startWolfBattle(entity)
           s"\n${entity.fullDescription} appears!"
         else "You go " + direction + "."
       else "You go " + direction + "."
@@ -98,21 +104,6 @@ class Player(startingArea: Area):
 
   def discard(item: String): Unit = this.currentInventory.remove(item)
 
-  /** BATTLE SPECIFIC ACTIONS BELOW */
-
-  def battle: GhostBattle = this.currentBattle.get
-
-  def attack(): String = this.battle.attack
-
-  def chat(): String = this.battle.chat
-
-  def giveTreat(treat: String): String = this.battle.giveTreat(treat)
-
-  def battleGo: String = s"\n${this.battle.ghost.name} is blocking the way!"
-
-  def escape(): String = this.battle.escape
-
-  def battleHelp: String = this.battle.help
 
     /** Returns a brief description of the player’s state, for debugging purposes. */
   override def toString = "Now at: " + this.location.name

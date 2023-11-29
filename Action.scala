@@ -8,16 +8,20 @@ class Action(input: String):
 
   // Kaikki fightin ja executen metodit palauttaa Stringin, muuten TextUI.playTurn.turnReport vittuilee!!!
 
-  def fight(actor: Player): Option[String] = this.verb match  // Actions available within a fight
-    case "attack"        => Some(actor.attack())
-    case "chat"          => Some(actor.chat())
-    case "give"          => Some(actor.giveTreat(this.modifiers))
-    // case "outside"    => Some(actor.tellWhere())
-    case "go"            => Some(actor.battleGo)
+  def fight(actor: Player): Option[String] = // Actions available within a fight
+    val battle = actor.battle
+    this.verb match
+    case "attack"        => Some(battle.attack)
+    case "chat"          => Some(battle.chat)
+    case "give"          => Some(battle.give(this.modifiers))
     case "quit"          => Some(actor.quit())
     case "inventory"     => Some(actor.inventory)
-    case "help"          => Some(actor.battleHelp)
-    case "escape"        => Some(actor.escape())
+    case "examine"       => Some(actor.examine(this.modifiers))
+    case "help"          => Some(battle.help)
+    case "escape"        => Some(battle.escape)
+    case "pet"           => Some(battle.pet)
+    case "go"            => Some(battle.go)
+    case "check"         => Some(battle.statusCheck)
     case other           => None
 
 
